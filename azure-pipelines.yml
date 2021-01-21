@@ -1,0 +1,48 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script:stages:
+  - deploy
+  
+  deploy:
+    image: ubuntu:18.04
+      when: manual
+        stage: deploy
+          before_script:
+              - apt-get update -qy
+                  - apt-get install -y lftp
+                      - apt-get install -y nodejs npm
+                        script:
+                            - npm i
+                                - npm run build
+                                    - lftp -e "set ssl:verify-certificate no; open $FTP_HOST; user $FTP_USERNAME $FTP_PASSWORD; mirror --reverse --verbose --delete dist/ $FTP_TARGET_DIR; bye"
+                                    
+                                    Leave a comment
+                                    © 2021 GitHub, Inc.
+                                    Terms
+                                    Privacy
+                                    Security
+                                    Status
+                                    Help
+                                    Contact GitHub
+                                    Pricing
+                                    API
+                                    Training
+                                    Blog
+                                    About
+                                     |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
